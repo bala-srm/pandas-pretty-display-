@@ -11,7 +11,7 @@ setup(
     description="A package to make pandas DataFrames display beautifully in Jupyter notebooks",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/pandas_pretty_display",
+    url="https://github.com/bala-srm/pandas_pretty_display-.git",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
