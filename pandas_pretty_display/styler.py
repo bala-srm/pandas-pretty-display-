@@ -2,7 +2,13 @@
 Module for styling pandas DataFrames with alternating colors and improved formatting.
 """
 
-from IPython.core.display import display, HTML
+try:
+    from IPython.display import display, HTML
+except ImportError:
+    try:
+        from IPython.core.display import display, HTML
+    except ImportError:
+        raise ImportError("Could not import display and HTML from IPython. Please ensure IPython is installed correctly.")
 
 def style_dataframe():
     """
