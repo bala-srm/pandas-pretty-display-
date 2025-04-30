@@ -31,12 +31,36 @@ display(df)
 ### Markdown Header Styling
 
 ```python
-from pandas_pretty_display import header1, header2, header3, style_notebook
+from pandas_pretty_display import style_notebook
 
-# Apply all styling at once (DataFrame + usage info)
+# Apply all styling at once (DataFrame + header styling)
 style_notebook()
 
-# Or use individual header functions
+# Now you can use regular markdown headers in markdown cells:
+# # Level 1 Header
+# ## Level 2 Header
+# ### Level 3 Header
+```
+
+All markdown headers in your notebook will automatically be styled with red borders, gold backgrounds, and dark blue text.
+
+### Individual Styling Functions
+
+You can also apply just the header styling without the DataFrame styling:
+
+```python
+from pandas_pretty_display import style_headers
+
+# Apply only header styling
+style_headers()
+```
+
+For backward compatibility, the package still includes functions to create headers directly in code cells:
+
+```python
+from pandas_pretty_display import header1, header2, header3
+
+# Create headers in code cells
 header1("This is a Level 1 Header")
 header2("This is a Level 2 Header")
 header3("This is a Level 3 Header")
