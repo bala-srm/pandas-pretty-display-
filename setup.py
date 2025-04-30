@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="pandas_pretty_display",
-    version="0.3.4",
+    version="0.3.5",
     author="Balaji",
     author_email="bala@python4u.in",
     description="A package to make pandas DataFrames display beautifully in Jupyter notebooks",
