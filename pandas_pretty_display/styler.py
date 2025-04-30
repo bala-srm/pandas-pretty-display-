@@ -44,6 +44,8 @@ def style_headers():
     - Dark blue text (#000080)
     - Rounded corners
     - Appropriate padding and margins
+    - Level 1 headers are bold and centered
+    - Level 2 headers are bold
     
     Returns:
         None
@@ -60,6 +62,8 @@ def style_headers():
         padding: 15px !important;
         margin: 10px 0px !important;
         font-size: 24px !important;
+        font-weight: bold !important;
+        text-align: center !important;
     }
     
     /* Universal selector for h2 headers */
@@ -71,6 +75,7 @@ def style_headers():
         padding: 12px !important;
         margin: 10px 0px !important;
         font-size: 20px !important;
+        font-weight: bold !important;
     }
     
     /* Universal selector for h3 headers */
@@ -85,7 +90,8 @@ def style_headers():
     }
     
     /* Additional selectors for specific Jupyter environments */
-    .rendered_html h1, .jp-RenderedMarkdown h1, .markdown h1, div[data-mime-type="text/markdown"] h1 {
+    .rendered_html h1, .jp-RenderedMarkdown h1, .markdown h1, div[data-mime-type="text/markdown"] h1,
+    .cm-header-1, .cm-header.cm-header-1, .CodeMirror-line .cm-header-1 {
         background-color: #ffcc00 !important;
         color: #000080 !important;
         border: 3px solid #ff0000 !important;
@@ -93,9 +99,12 @@ def style_headers():
         padding: 15px !important;
         margin: 10px 0px !important;
         font-size: 24px !important;
+        font-weight: bold !important;
+        text-align: center !important;
     }
     
-    .rendered_html h2, .jp-RenderedMarkdown h2, .markdown h2, div[data-mime-type="text/markdown"] h2 {
+    .rendered_html h2, .jp-RenderedMarkdown h2, .markdown h2, div[data-mime-type="text/markdown"] h2,
+    .cm-header-2, .cm-header.cm-header-2, .CodeMirror-line .cm-header-2 {
         background-color: #ffcc00 !important;
         color: #000080 !important;
         border: 2px solid #ff0000 !important;
@@ -103,15 +112,78 @@ def style_headers():
         padding: 12px !important;
         margin: 10px 0px !important;
         font-size: 20px !important;
+        font-weight: bold !important;
     }
     
-    .rendered_html h3, .jp-RenderedMarkdown h3, .markdown h3, div[data-mime-type="text/markdown"] h3 {
+    .rendered_html h3, .jp-RenderedMarkdown h3, .markdown h3, div[data-mime-type="text/markdown"] h3,
+    .cm-header-3, .cm-header.cm-header-3, .CodeMirror-line .cm-header-3 {
         background-color: #ffcc00 !important;
         color: #000080 !important;
         border: 1px solid #ff0000 !important;
         border-radius: 5px !important;
         padding: 10px !important;
         margin: 10px 0px !important;
+        font-size: 18px !important;
+    }
+    
+    /* VS Code specific selectors */
+    .vscode-dark h1, .vscode-light h1, .vscode h1,
+    .vscode-dark h2, .vscode-light h2, .vscode h2,
+    .vscode-dark h3, .vscode-light h3, .vscode h3 {
+        background-color: #ffcc00 !important;
+        color: #000080 !important;
+        border-radius: 5px !important;
+        margin: 10px 0px !important;
+    }
+    
+    .vscode-dark h1, .vscode-light h1, .vscode h1 {
+        border: 3px solid #ff0000 !important;
+        padding: 15px !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    
+    .vscode-dark h2, .vscode-light h2, .vscode h2 {
+        border: 2px solid #ff0000 !important;
+        padding: 12px !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+    }
+    
+    .vscode-dark h3, .vscode-light h3, .vscode h3 {
+        border: 1px solid #ff0000 !important;
+        padding: 10px !important;
+        font-size: 18px !important;
+    }
+    
+    /* Windsurf specific selectors */
+    .markdown-cell h1, .markdown-cell h2, .markdown-cell h3,
+    .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+        background-color: #ffcc00 !important;
+        color: #000080 !important;
+        border-radius: 5px !important;
+        margin: 10px 0px !important;
+    }
+    
+    .markdown-cell h1, .markdown-body h1 {
+        border: 3px solid #ff0000 !important;
+        padding: 15px !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    
+    .markdown-cell h2, .markdown-body h2 {
+        border: 2px solid #ff0000 !important;
+        padding: 12px !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+    }
+    
+    .markdown-cell h3, .markdown-body h3 {
+        border: 1px solid #ff0000 !important;
+        padding: 10px !important;
         font-size: 18px !important;
     }
     </style>
@@ -133,7 +205,9 @@ def style_headers():
                 'border-radius': '5px',
                 'padding': '15px',
                 'margin': '10px 0px',
-                'font-size': '24px'
+                'font-size': '24px',
+                'font-weight': 'bold',
+                'text-align': 'center'
             };
             
             // Style for h2
@@ -144,7 +218,8 @@ def style_headers():
                 'border-radius': '5px',
                 'padding': '12px',
                 'margin': '10px 0px',
-                'font-size': '20px'
+                'font-size': '20px',
+                'font-weight': 'bold'
             };
             
             // Style for h3
@@ -204,7 +279,7 @@ def header1(text):
     """
     html = f"""
     <div style="margin: 10px; padding: 15px; border-radius: 5px; border: 3px solid #ff0000; 
-    background-color: #ffcc00; color: #000080; font-size: 24px; font-weight: bold;">
+    background-color: #ffcc00; color: #000080; font-size: 24px; font-weight: bold; text-align: center;">
     {text}
     </div>
     """
@@ -263,17 +338,3 @@ def style_notebook():
     
     # Apply header styling
     style_headers()
-    
-    # Display usage information
-    display(HTML("""
-    <div style="margin: 10px; padding: 10px; border-radius: 5px; border: 1px solid #cccccc; background-color: #f9f9f9;">
-    <p><strong>Notebook styling applied!</strong></p>
-    <p>All markdown headers and pandas DataFrames will now be styled automatically.</p>
-    <p>Examples of markdown headers:</p>
-    <pre>
-    # Level 1 Header
-    ## Level 2 Header
-    ### Level 3 Header
-    </pre>
-    </div>
-    """))
