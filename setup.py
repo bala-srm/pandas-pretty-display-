@@ -5,13 +5,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="pandas_pretty_display",
-    version="0.3.0",
+    version="0.3.1",
     author="Balaji",
     author_email="bala@python4u.in",
     description="A package to make pandas DataFrames display beautifully in Jupyter notebooks",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/bala-srm/pandas_pretty_display-.git",
+    url="https://github.com/bala-srm/pandas-pretty-display-.git",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
