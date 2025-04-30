@@ -335,21 +335,42 @@ def style_notebook():
     Returns:
         None
     """
-    # Use IPython's get_ipython to execute JavaScript that suppresses output
-    ip = get_ipython()
-    if ip is not None:
-        # Execute JavaScript to clear any previous output
-        ip.run_cell_magic('javascript', '', '''
-        // Clear any previous output
-        var cell_element = this.element.parents('.cell');
-        var output_area = cell_element.find('.output_area');
-        if (output_area.length > 0) {
-            output_area.hide();
-        }
-        ''')
-    
     # Apply DataFrame styling
     style_dataframe()
     
     # Apply header styling
     style_headers()
+    
+    # Use a safer approach to hide output that doesn't rely on 'this.element'
+    display(HTML("""
+    <script>
+    // Safer approach to hide output
+    (function() {
+        try {
+            // Try to find the current output area in various ways
+            var outputs = document.querySelectorAll('.output_area, .jp-OutputArea');
+            if (outputs.length > 0) {
+                // Get the most recently created output (likely to be from this cell)
+                var lastOutput = outputs[outputs.length - 1];
+                
+                // Check if this is the right output (from the current cell)
+                var currentCell = lastOutput.closest('.cell, .jp-Cell');
+                if (currentCell) {
+                    // Hide text output but keep any styling that was applied
+                    var textOutputs = currentCell.querySelectorAll('.output_text, .jp-OutputArea-output');
+                    textOutputs.forEach(function(output) {
+                        if (output.textContent.includes('Notebook styling applied') || 
+                            output.textContent.includes('All markdown headers') ||
+                            output.textContent.includes('Examples of markdown headers')) {
+                            output.style.display = 'none';
+                        }
+                    });
+                }
+            }
+        } catch (e) {
+            // Silently fail if there's an error - we don't want to break the notebook
+            console.log('Note: Could not hide output message, but styling is still applied.');
+        }
+    })();
+    </script>
+    """))
