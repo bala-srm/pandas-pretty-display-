@@ -4,9 +4,11 @@ Module for styling pandas DataFrames with alternating colors and improved format
 
 try:
     from IPython.display import display, HTML
+    from IPython import get_ipython
 except ImportError:
     try:
         from IPython.core.display import display, HTML
+        from IPython import get_ipython
     except ImportError:
         raise ImportError("Could not import display and HTML from IPython. Please ensure IPython is installed correctly.")
 
@@ -333,6 +335,19 @@ def style_notebook():
     Returns:
         None
     """
+    # Use IPython's get_ipython to execute JavaScript that suppresses output
+    ip = get_ipython()
+    if ip is not None:
+        # Execute JavaScript to clear any previous output
+        ip.run_cell_magic('javascript', '', '''
+        // Clear any previous output
+        var cell_element = this.element.parents('.cell');
+        var output_area = cell_element.find('.output_area');
+        if (output_area.length > 0) {
+            output_area.hide();
+        }
+        ''')
+    
     # Apply DataFrame styling
     style_dataframe()
     
