@@ -1,6 +1,6 @@
 # Pandas Pretty Display
 
-A simple Python package to make your pandas DataFrames look beautiful in Jupyter notebooks with alternating colors and improved formatting.
+A simple Python package to make your pandas DataFrames look beautiful in Jupyter notebooks with alternating colors and improved formatting. Now with support for styled markdown headers!
 
 ## Installation
 
@@ -11,6 +11,8 @@ pip install pandas-pretty-display
 ```
 
 ## Usage
+
+### DataFrame Styling
 
 ```python
 from pandas_pretty_display import style_dataframe
@@ -26,8 +28,23 @@ style_dataframe()
 display(df)
 ```
 
+### Markdown Header Styling
+
+```python
+from pandas_pretty_display import header1, header2, header3, style_notebook
+
+# Apply all styling at once (DataFrame + usage info)
+style_notebook()
+
+# Or use individual header functions
+header1("This is a Level 1 Header")
+header2("This is a Level 2 Header")
+header3("This is a Level 3 Header")
+```
+
 ## Features
 
+### DataFrame Styling
 - Alternating gold and light blue row colors
 - Black text in table cells
 - Red text in table headers
@@ -35,6 +52,14 @@ display(df)
 - 18px font size
 - Full-width container
 - Scrollable output up to 1000px height
+
+### Header Styling
+- Level 1, 2, and 3 headers with consistent styling
+- Red border (thickness varies by level)
+- Gold background (#ffcc00)
+- Dark blue text (#000080)
+- Responsive sizing based on header level
+- Rounded corners for modern appearance
 
 ## Requirements
 
